@@ -1,0 +1,76 @@
+.nav {
+  /* min-width: 300px; */
+  /* max-width: 400px; */
+  /* align-self: flex-start; */
+  /* max-height: calc(100vh - 70px); */
+  /* height: 100%; */
+  /* padding: 16px; */
+  /* margin: 8px; */
+  /* position: sticky;
+  top: 48px; */
+}
+
+
+.nav a {
+  color: grey;
+  text-decoration: none;
+  align-self: center;
+  /* line-height: 28px; */
+}
+
+.item {
+  display: flex;
+}
+
+  /* border-radius: 50%;
+  border: 2px solid; */
+/* .item > div {
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  margin: 8px;
+  display: block;
+  background-image: url(../public/images/1f955.svg);
+} */
+
+/* .nav li > div {
+  line-height: 32px;
+} */
+
+
+  /* border: 2px solid rgb(102, 153, 204);
+  background-color: rgb(102, 153, 204); */
+/* li.active > .item > div {
+  border-radius: 0%;
+  border: none;
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  margin: 8px;
+  background-image: url(../public/images/profile.svg);
+} */
+
+.nav ul {
+  padding: 0px;
+  margin: 0px;
+  list-style-type : none;
+  display: block;
+}
+
+.nav li {
+  display: list-item;
+}
+
+.nav li li {
+  padding-left: 8px;
+  margin-left: 16px;
+}
+
+
+.nav li a:hover {
+  color: rgb(216, 222, 233);
+}
+
+.nav li.active > div > a {
+  color: rgb(216, 222, 233);
+}
