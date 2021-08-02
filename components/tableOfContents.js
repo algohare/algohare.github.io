@@ -54,42 +54,38 @@ const Headings = ({ headings, activeId }) => (
   </ul>
 );
 
-const useHeadingsData = () => {
+const useHeadingsData = (title, contentSelector, headingSelector) => {
   const [nestedHeadings, setNestedHeadings] = useState([]);
 
   useEffect(() => {
-    const headingElements = Array.from(
-      document.querySelectorAll("h2, h3")
-    ).filter(x => x.id !== "");
-
-    const newNestedHeadings = getNestedHeadings(headingElements);
+    const newNestedHeadings = getNestedHeadings(contentSelector, headingSelector);
     setNestedHeadings(newNestedHeadings);
-  }, []);
+  // });
+  }, [title]);
 
   return { nestedHeadings };
 }
 
-const getNestedHeadings = (headingElements) => {
+const getNestedHeadings = (contentSelector, headingSelector) => {
   const nestedHeadings = [];
+  const headingElements = getHeadingElements(contentSelector, headingSelector);
+  const headingSelectorArray = headingSelector.replace(' ', '').split(',');
 
   headingElements.forEach((heading, index) => {
     const { innerText: title, id } = heading;
-    if (heading.nodeName === "H2") {
-      nestedHeadings.push({ id, title, items: [] });
+    const idx = headingSelectorArray.indexOf(heading.nodeName.toLowerCase());
+    let cur = nestedHeadings;
+    for (let i = 0; i < idx; ++i) {
+      cur = cur[cur.length-1].items;
     }
-    else if (heading.nodeName === "H3" && nestedHeadings.length > 0) {
-      nestedHeadings[nestedHeadings.length - 1].items.push({
-        id,
-        title,
-      });
-    }
+    cur.push({ id, title, items: []})
   });
 
   return nestedHeadings;
 };
 
 
-const useIntersectionObserver = (setActiveId) => {
+const useIntersectionObserver = (title, rootMargin, contentSelector, headingSelector, setActiveId) => {
   const headingElementsRef = useRef({});
   const prevActiveIdIndex = useRef(-1);
   useEffect(() => {
@@ -151,11 +147,10 @@ const useIntersectionObserver = (setActiveId) => {
     }
 
     const observer = new IntersectionObserver(callback, {
-      rootMargin: "-110px 0px -40% 0px",
-      // rootMargin: "-110px 0px -110px 0px",
+      rootMargin
     });
 
-    const headingElements = Array.from(document.querySelectorAll("h2, h3")).filter(x => x.id !== "");
+    const headingElements = getHeadingElements(contentSelector, headingSelector)
     const headingId2Index = {};
 
     for (let i = 0; i < headingElements.length; ++i) {
@@ -164,15 +159,29 @@ const useIntersectionObserver = (setActiveId) => {
       observer.observe(element);
     }
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      observer.disconnect();
+      headingElementsRef.current = {};
+      prevActiveIdIndex.current = -1;
+      // console.log(headingElementsRef);
+    }
+  // });
+  }, [title]);
 };
 
 
-const TableOfContents = () => {
-  const { nestedHeadings } = useHeadingsData();
+const getHeadingElements = (contentSelector, headingSelector) => {
+  const headingElements = Array.from(
+    document.querySelector(contentSelector).querySelectorAll(headingSelector)
+  ).filter(x => x.id !== "");
+
+  return headingElements;
+}
+
+const TableOfContents = ({title, contentSelector, headingSelector, rootMargin}) => {
+  const { nestedHeadings } = useHeadingsData(title, contentSelector, headingSelector);
   const [activeId, setActiveId] = useState();
-  useIntersectionObserver(setActiveId);
+  useIntersectionObserver(title, rootMargin, contentSelector, headingSelector, setActiveId);
 
   const [count, setCount] = useState(0);
   useEffect(() => {

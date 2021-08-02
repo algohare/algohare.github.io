@@ -1,0 +1,22 @@
+@use "../../styles/base.scss" as base;
+
+.headerContainer {
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  height: base.$height-header;
+  background-color: #21222C;
+}
+
+.headerContainer,
+.mainContainer {
+  display: flex;
+  box-sizing: border-box;
+  > div {
+    margin: 0 auto;
+    width: base.$width;
+    @media screen and (max-width: base.$width) {
+      width: 100%;
+    }
+  }
+}

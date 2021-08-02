@@ -5,26 +5,34 @@
   height: 5em;
   box-sizing: border-box;
   background-color: #21222C;
+  padding: 0 1rem;
 }
 
 .mainContainer {
   display: flex;
   /* background-color: #161822; */
   /* padding-left: 180px; */
-  /* margin-bottom: 40%; */
+  // margin-bottom: 40%;
   max-width: 1300px;
   margin: 0 auto;
 }
 
 
 .maincontentContainer {
-  padding: 0 16px;
   min-width: 600px;
+  max-width: 1300px;
+  width: 100%;
   // max-width: 800px;
   // box-sizing: border-box;
   display: flex;
   flex-direction: column;
   /* margin-bottom: calc(60vh); */
+}
+
+.mainCategoryContainer {
+  // margin: 16px 0;
+  // padding: 16px;
+  // background-color: #383A59;
 }
 
 /*  */
@@ -42,8 +50,12 @@
 }
 
 .mainbodyContainer {
-  padding: 1em 2em;
+  padding: 1.5em;
+  overflow: auto;
   background-color: #383A59;
+  > h1 {
+    margin-top: 0;
+  }
   h1 {
     color: #FFFFFF;
     font-weight: normal;
@@ -56,28 +68,31 @@
   }
   p {
     font-weight: normal;
-    font-size: 0.9rem;
+    font-size: 0.9em;
     line-height: 1.5;
     margin: 1.5em 0;
   }
-
   blockquote {
-    p {
+    background: #282a36;
+    border-left: 6px solid #6272a4;
+    quotes: "\201C""\201D""\2018""\2019";
+      max-width: fit-content;
+      padding: 1em calc(2em + 25px) 1em 1em;
       margin: 1em 0;
-      // color: #FF79C6;
-    }
-    hr {
-      border: 1px solid #6272a4;
-    }
+      overflow: auto;
+      p {
+        margin: 0;
+      }
+      hr {
+        border: 1px solid #6272a4;
+      }
   }
 }
 
 .mainsidebarContainer {
-  font-size: 0.9375em;
   position: sticky;
-  /* top: 110px; */
-  top: calc(5em / 0.9375);
-  max-height: calc(100vh - (5em / 0.9375));
+  top: 5em;
+  max-height: calc(100vh - 5em);
   /* height: fit-content; */
   max-width: 400px;
   min-width: 300px;
@@ -88,9 +103,11 @@
 }
 
 .mainsidebarTOCContainer {
+  font-size: 0.9375em;
   background-color: #21222C;
-  padding: calc(1em / 0.9375);
-  border-radius: 0 0 10px 10px;
+  // padding: calc(1em / 0.9375);
+  padding: 1em;
+  border-radius: 0 0 0.625em 0.625em;
 }
 
 .footerContainer {

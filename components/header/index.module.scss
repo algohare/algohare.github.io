@@ -1,0 +1,29 @@
+@use "../../styles/base.scss" as base;
+
+.headerContainer {
+  display: flex;
+  padding: 0 1rem;
+  height: 100%;
+  align-items: center;
+  margin: 0 auto;
+  div:first-child {
+    a:hover {
+      color: #ff79c6;
+    }
+  }
+  div:last-child {
+    margin-left: auto;
+    a {
+      padding: 0.4rem 0.6rem;
+    }
+    a:hover {
+      background-color: #44475a55;
+      border-radius: 0.7em;
+    }
+  }
+}
+
+.headerText {
+  font-size: 2em;
+  letter-spacing: -1px;
+}

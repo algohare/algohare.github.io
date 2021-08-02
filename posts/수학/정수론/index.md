@@ -1,6 +1,6 @@
 ---
 title: 정수론
-date: '2020-01-02'
+date: '2020-01-02T11:00:00'
 ---
 ## 개요
 > Die Mathematik ist die Königin der Wissenschaften, und die Arithmetik ist die Königin der Mathematik.  
